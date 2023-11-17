@@ -1,0 +1,92 @@
+using System;
+
+
+namespace TIC_TAC_TOE
+{
+    class Program
+    {
+
+        static bool c = true;
+        public static char[,] marks(char[,] field, int a, int b)
+        {
+            char mark;
+            if (c == true)
+            {
+                mark = 'O';
+            }
+            else
+            {
+                mark = 'X';
+            }
+            if (field[a, b] != '*')
+            {
+                c = !c;
+                return field;
+            }
+            field[a, b] = mark;
+            return field;
+        }
+
+        public static bool winCond(char[,] field)
+        {
+            if (field[0,0] == field[0,1] && field[0,1] == field[0,2] && field[0,1] != '*')
+            {
+                return false;
+            }
+            if (field[1,0] == field[1,1] && field[1,1] == field[1,2] && field[1, 1] != '*')
+            {
+                return false;
+            }
+            if (field[2,0] == field[2,1] && field[2,1] == field[2,2] && field[2, 1] != '*')
+            {
+                return false;
+            }
+            
+            if (field[0,0] == field[1,0] && field[1,0] == field[2,0] && field[1, 0] != '*')
+            {
+                return false;
+            }
+            if (field[0,1] == field[1,1] && field[1,1] == field[2,1] && field[1, 1] != '*')
+            {
+                return false;
+            }
+            if (field[0,2] == field[1,2] && field[1,2] == field[2,2] && field[1, 2] != '*')
+            {
+                return false;
+            }
+            
+            if (field[0,0] == field[1,1] && field[1,1] == field[2,2] && field[1, 1] != '*')
+            {
+                return false;
+            }
+            if (field[2,0] == field[1,1] && field[1,1] == field[0,2] && field[1, 1] != '*')
+            {
+                return false;
+            }
+            return true;
+        }
+
+        static void Main(string[] args)
+        {
+            char[,] field = new char[,] { { '*', '*', '*' }, { '*', '*', '*' }, { '*', '*', '*' } };
+            while (winCond(field))
+            {              
+                int a = int.Parse(System.Console.ReadLine());
+                int b = int.Parse(System.Console.ReadLine());                
+                marks(field,a,b);
+                c = !c;
+                for (int e = 0; e <= 2; e++)
+                {
+                    for (int j = 0; j <= 2; j++)
+                    {
+                        Console.Write($"{field[e, j]} \t");
+                    }
+                    Console.WriteLine();
+                }
+            }          
+        }
+    }
+}
+
+
+
